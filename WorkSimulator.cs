@@ -17,7 +17,7 @@ namespace WinFormThreads
                 Thread.Sleep(100);
                 progressChanged(i);
             }
-            isWorkComplite(_cancelled);
+            workComplite(_cancelled);
         }
 
         public void Cancel()
@@ -25,8 +25,20 @@ namespace WinFormThreads
             _cancelled = true;
         }
 
+        public void OnProgressChange(object i)
+        {
+            if (progressChanged != null)
+                progressChanged( (int) i );
+        }
+
+        public void OnWorkComplete(object cancel)
+        {
+            if (workComplite != null)
+                workComplite( (bool) cancel );
+        }
+
         public event Action<int> progressChanged;
-        public event Action<bool> isWorkComplite;
+        public event Action<bool> workComplite;
 
     }
 }
