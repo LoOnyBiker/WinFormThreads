@@ -62,25 +62,28 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(20, 11);
             this.label1.MaximumSize = new System.Drawing.Size(370, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(352, 26);
+            this.label1.Size = new System.Drawing.Size(354, 26);
             this.label1.TabIndex = 3;
-            this.label1.Text = "So... Yeah, it\'s just a simple form doing absolutely nothing. Just simulating som" +
-    "e activity. You could start simulation or stop it";
+            this.label1.Text = "So... Yeah, it\'s just a simple form doing absolutely nothing. Only simulating som" +
+    "e activity. You could start simulation or stop it.";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 171);
+            this.ClientSize = new System.Drawing.Size(394, 172);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.progressBar1);
+            this.MaximumSize = new System.Drawing.Size(410, 210);
+            this.MinimumSize = new System.Drawing.Size(410, 210);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Windows Forms Threading";
             this.ResumeLayout(false);
             this.PerformLayout();
 

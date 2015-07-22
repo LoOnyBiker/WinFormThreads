@@ -26,7 +26,7 @@ namespace WinFormThreads
             btnStart.Enabled = false;
             btnStop.Enabled = true;
 
-            //sim.Work();
+            //sim.Work();   // One thread version
             Thread thread = new Thread(sim.Work);
             thread.Start();
         }

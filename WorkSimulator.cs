@@ -15,9 +15,9 @@ namespace WinFormThreads
                 if (_cancelled)
                     break;
                 Thread.Sleep(100);
-                progressChanged(i);
+                OnProgressChange(i);
             }
-            workComplite(_cancelled);
+            OnWorkComplete(_cancelled);
         }
 
         public void Cancel()
