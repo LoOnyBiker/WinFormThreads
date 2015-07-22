@@ -9,13 +9,17 @@ namespace WinFormThreads
     {
         private WorkSimulator sim;
         private TaskScheduler sheduler;
+        private SynchronizationContext syncContext;
 
         public Form1()
         {
             InitializeComponent();
 
+            syncContext = SynchronizationContext.Current;
+
             btnStart.Click += btnStart_Click;
             btnStop.Click += btnStop_Click;
+            Load += Form1_Load;
             btnStop.Enabled = false;
         }
 
@@ -32,20 +36,8 @@ namespace WinFormThreads
             btnStart.Enabled = false;
             btnStop.Enabled = true;
 
-            //sim.Work();   // One thread version
-
-            //Thread thread = new Thread(sim.Work);
-            //thread.Start();
-
             var cancelled = await Task<bool>.Factory.StartNew(sim.Work);
-
-            this.isInvokeRequired(() =>
-            {
-                string msg = cancelled ? "Process cancelled." : "Progress completed";
-                MessageBox.Show(msg);
-                btnStart.Enabled = true;
-                btnStop.Enabled = false;
-            });
+            simulationComplete(cancelled);
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -54,12 +46,17 @@ namespace WinFormThreads
                 sim.Cancel();
         }
 
+        private void simulationComplete(bool cancelled)
+        {
+            string msg = cancelled ? "Process cancelled." : "Progress completed";
+            MessageBox.Show(msg);
+            btnStart.Enabled = true;
+            btnStop.Enabled = false;
+        }
+
         private void progressChanged(int progressValue)
         {
-            this.isInvokeRequired(() =>
-            {
-                progressBar1.Value = progressValue;
-            });
+            syncContext.Post(o => progressBar1.Value = progressValue, null);
         }
     }
 }
